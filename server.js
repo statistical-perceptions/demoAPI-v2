@@ -1,0 +1,28 @@
+// const http = require('http');
+const express = require('express');
+const bodyParser  = require('body-parser'); // with req.body
+const cors = require('cors'); // front end needs this
+
+const hostname = 'localhost'; // connect to mongodb database later
+const port = 3000;
+
+const app = express();
+app.use(bodyParser.json());
+app.use(cors());
+
+let demoData = require('./data');
+
+// GET
+app.get('/api/feedback', (req, res) => {
+    if (!demoData) {
+        res.status(404).json({message : 'No demoData found'});
+    }
+    res.json(demoData);
+})
+
+// GET single entry
+
+app.listen(port, hostname, () => {
+    console.log(`Server is running on http://${hostname}:${port}`)
+});
+
