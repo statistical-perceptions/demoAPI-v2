@@ -53,7 +53,7 @@ app.post('/api/feedback', (req, res) => {
     res.json(entry);
 });
 
-// PUT
+// PUT update a specific userID
 app.put('/api/feedback/:userID', (req, res) => {
     const requestID = req.params.userID;
     // filter down:
@@ -62,7 +62,7 @@ app.put('/api/feedback/:userID', (req, res) => {
         return demoEntry.userID == requestID;
     })[0];
     // storing the index of the incoming entry change
-    const index = demoData.indexOf(demoEntry)
+    const index = demoData.indexOf(demoEntry);
     // all the keys from req.body
     const keys = Object.keys(req.body);
     // loop through each kv pair to do necessary updates
@@ -79,6 +79,18 @@ app.put('/api/feedback/:userID', (req, res) => {
     // return the modified entry
     res.json(demoData[index]);
 });
+
+// DELETE a specific userID
+app.delete('/api/feedback/:userID', (req, res) => {
+    const requestID = req.params.userID;
+    // locate the one we want
+    let demoEntry = demoData.filter(demoEntry => {
+        return demoEntry.userID == requestID;
+    })[0];
+    const index = demoData.indexOf(demoEntry);
+    demoData.splice(index, 1); // delete that one entry
+    res.json({ message: `${requestID} has been deleted.`});
+})
 
 app.listen(port, hostname, () => {
     console.log(`Server is running on http://${hostname}:${port}`)
