@@ -17,8 +17,5 @@ Note: body-parser takes input from requests and provides ways to use them. cors 
 
 Create some demo data with ``` touch node.js ``` then put some json in there.  
 
-
-
-
-
+Use postman to test out sending requests. Note that when you do POST or DELETE, select body - raw, and then write a json data etry. Click into 'code', make sure that the cotent type is application/json. 
 

@@ -18,7 +18,7 @@ app.get('/api/feedback', (req, res) => {
         res.status(404).json({message : 'No demoData found'});
     }
     res.json(demoData);
-})
+});
 
 // GET single entry
 app.get('/api/feedback/:userID', (req, res) => {
@@ -35,10 +35,21 @@ app.get('/api/feedback/:userID', (req, res) => {
     res.json(demoData);
     // returning the only element in the array
     res.json(demoEntry[0])
-})
+});
 
 // POST
-
+app.post('/api/feedback', (req, res) => {
+    // making an entry
+    const entry = {
+        userID: req.body.userID,
+        sliderVal: req.body.sliderVal,
+        q1: req.body.q1
+    }
+    // this is for demo / dev
+    demoData.push(entry);
+    // res with entry object itself
+    res.json(entry);
+});
 
 app.listen(port, hostname, () => {
     console.log(`Server is running on http://${hostname}:${port}`)
