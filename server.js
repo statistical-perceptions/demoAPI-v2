@@ -24,6 +24,12 @@ mongoose.connect(mongooseURI, dbOptions, (err) => {
       });
 });
 
+app.get("/", (req, res) => {
+    res.send("Use /api/feedback to GET or POST." +  
+    "Use /api/feedback/:userID (example: /api/feedback/test03) to "+ 
+    "GET specific userID, PUT or DELTE.\n");
+});
+
 app.use('/api/feedback', require('./api/demoEntries/routes/postEntry'));
 app.use('/api/feedback', require('./api/demoEntries/routes/getEntry'));
 app.use('/api/feedback', require('./api/demoEntries/routes/getSpecificEntry'));
