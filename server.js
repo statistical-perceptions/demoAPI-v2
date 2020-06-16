@@ -18,6 +18,7 @@ app.use(cors());
 
 app.use('/api/feedback', require('./api/demoEntries/routes/postEntry'));
 app.use('/api/feedback', require('./api/demoEntries/routes/getEntry'));
+app.use('/api/feedback', require('./api/demoEntries/routes/getSpecificEntry'));
 
 app.listen(port, hostname, () => {
     // connect to mongoose
