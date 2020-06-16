@@ -20,6 +20,7 @@ app.use('/api/feedback', require('./api/demoEntries/routes/postEntry'));
 app.use('/api/feedback', require('./api/demoEntries/routes/getEntry'));
 app.use('/api/feedback', require('./api/demoEntries/routes/getSpecificEntry'));
 app.use('/api/feedback', require('./api/demoEntries/routes/deleteEntry'));
+app.use('/api/feedback', require('./api/demoEntries/routes/putEntry'));
 
 app.listen(port, hostname, () => {
     // connect to mongoose
