@@ -14,7 +14,7 @@ router.route('/')
         entry.save((err, entry) => {
             if (err) {
                 res.status(400).json(err);
-            }
+            };
             res.json(entry);
         });
     });

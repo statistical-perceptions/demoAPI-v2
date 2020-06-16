@@ -16,11 +16,13 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+app.use('/api/feedback', require('./api/demoEntries/routes/postEntry'));
+
 app.listen(port, hostname, () => {
     // connect to mongoose
     mongoose.connect(mongooseURI, dbOptions, (err) => {
         if (err) {
-            console.log(err)
+            console.log(err);
         }
         console.log(`Server is running on http://${hostname}:${port}`);
     });

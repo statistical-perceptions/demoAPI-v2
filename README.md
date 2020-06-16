@@ -37,5 +37,10 @@ username: user
 password: p123456
 ```
 
+Installed mongodb community edition with homebrew. 
+```
+brew tap mongodb/brew
+brew install mongodb-community@4.2
+```
 
 
