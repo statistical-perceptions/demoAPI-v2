@@ -1,3 +1,0 @@
-const data = [{ "_id": "5ee6492b552f660004b13105", "userID": "test01", "sliderVal": "01", "q1": "blah01" }, { "_id": "5ee675f8afacf3000446c523", "userID": "test02", "sliderVal": "02", "q1": "blah02" }, { "_id": "5ee6760aafacf3000446c524", "userID": "test03", "sliderVal": "03", "q1": "blah03" }, { "_id": "5ee68058b65c840004743ded", "userID": "test04", "sliderVal": "04", "q1": "blah04" }, { "_id": "5ee68389890a0b0004c71bc0", "userID": "test04", "sliderVal": "04", "q1": "blah04-2" }, { "_id": "5ee687bb27f6f30004a9ca88", "userID": "test05", "sliderVal": "05", "q1": "blah05" }];
-
-module.exports = data;

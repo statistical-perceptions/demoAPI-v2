@@ -44,6 +44,6 @@ brew install mongodb-community@4.2
 ```
 You can use the mongo shell credentials on mongodb to access the database through command line.
 
-
+For now, use postman to send requests.
 
 
