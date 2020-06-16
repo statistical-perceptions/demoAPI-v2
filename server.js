@@ -19,8 +19,12 @@ app.use(cors());
 mongoose.connect(mongooseURI, dbOptions, (err) => {
     if (err) {
         console.log(err);
-    }
+    };
     // console.log(`Server is running on http://${hostname}:${port}`);
+    var server = app.listen(process.env.PORT, function () {
+        var port = server.address().port;
+        console.log("App now running on port", port);
+      });
 });
 
 app.use('/api/feedback', require('./api/demoEntries/routes/postEntry'));
