@@ -19,3 +19,23 @@ Create some demo data with ``` touch node.js ``` then put some json in there.
 
 Use postman to test out sending requests. Note that when you do POST or DELETE, select body - raw, and then write a json data etry. Click into 'code', make sure that the cotent type is application/json. 
 
+We want to model our data so that our data has the same structure (schema) across apps. This is when mongoose comes in. Run the following to install dependencies. (mongodb-uri) is used so that we can connect to mongodb. 
+```
+npm install mongoose mongodb-uri --save
+```
+
+At this point, I've also created an app on heroku with 
+```
+heroku create test-api-615
+# now add mongodb
+heroku addons:create mongolab
+```
+
+Go to heroku website, enter our app test-api-615, click on mongodb addon to access mLab website. Under Users, create a new user with credentials: 
+```
+username: user
+password: p123456
+```
+
+
+
