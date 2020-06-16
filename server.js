@@ -25,9 +25,9 @@ mongoose.connect(mongooseURI, dbOptions, (err) => {
 });
 
 app.get("/", (req, res) => {
-    res.send("Use /api/feedback to GET or POST." +  
+    res.send("Use /api/feedback to GET or POST.\n" +  
     "Use /api/feedback/:userID (example: /api/feedback/test03) to "+ 
-    "GET specific userID, PUT or DELTE.\n");
+    "GET specific userID, PUT or DELTE.");
 });
 
 app.use('/api/feedback', require('./api/demoEntries/routes/postEntry'));
