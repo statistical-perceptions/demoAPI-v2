@@ -13,9 +13,7 @@ npm install -g nodemon
 # to install libraries in project directory
 npm install mongodb express body-parser cors --save
 ```
-Note: body-parser takes input from requests and provides ways to use them. cors allows you to access resources cross-domain. cors is not super necessary for this particular api as there will not be any frontend for now. 
-
-Create some demo data with ``` touch node.js ``` then put some json in there.  
+Note: body-parser takes input from requests and provides ways to use them. cors allows you to access resources cross-domain. cors is not super necessary for this particular api as there will not be any frontend for now.  
 
 Use postman to test out sending requests. Note that when you do POST or DELETE, select body - raw, and then write a json data etry. Click into 'code', make sure that the cotent type is application/json. 
 
@@ -23,6 +21,7 @@ We want to model our data so that our data has the same structure (schema) acros
 ```
 npm install mongoose mongodb-uri --save
 ```
+Schema is in api/demoEntries/model/demoEntry.js
 
 At this point, I've also created an app on heroku with 
 ```
@@ -44,6 +43,5 @@ brew install mongodb-community@4.2
 ```
 You can use the mongo shell credentials on mongodb to access the database through command line.
 
-For now, use postman to send requests.
 
 
