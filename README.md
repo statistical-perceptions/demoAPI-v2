@@ -43,5 +43,7 @@ brew install mongodb-community@4.2
 ```
 You can use the mongo shell credentials on mongodb to access the database through command line.
 
-
+6/18
+About to a functionality that lets researchers create collections on mongodb and connect with that collection.
+ 
 

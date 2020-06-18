@@ -10,8 +10,8 @@ const demoEntrySchema = new Schema({
     sliderVal: { type: String, required: true},
     q1: { type: String, required: false},
     q2: { type: String, required: false},
-    q3: { type: String, required: false}
-});
+    q3: { type: String, required: false}},
+    { collection : 'test'});
 
 // use Entry to reference our model in other files.
 module.exports = mongoose.model('Entry', demoEntrySchema);
