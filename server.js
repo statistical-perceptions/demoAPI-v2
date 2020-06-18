@@ -28,7 +28,6 @@ app.get("/", (req, res) => {
     res.send("Use /api/feedback to GET or POST.\n" +  
     "Use /api/feedback/:userID (example: /api/feedback/test03) to "+ 
     "GET specific userID, PUT or DELTE.");
-    return res.redirect('/api/feedback');
 });
 
 app.use('/api/feedback', require('./api/demoEntries/routes/postEntry'));
