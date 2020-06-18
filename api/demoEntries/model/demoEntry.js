@@ -2,6 +2,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
+var Collection = require('./changeCol');
 // use Schema
 const Schema = mongoose.Schema;
 
@@ -11,7 +12,7 @@ const demoEntrySchema = new Schema({
     q1: { type: String, required: false},
     q2: { type: String, required: false},
     q3: { type: String, required: false}},
-    { collection : 'test'});
+    { collection : Collection.col_name});
 
 // use Entry to reference our model in other files.
 module.exports = mongoose.model('Entry', demoEntrySchema);

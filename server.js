@@ -3,6 +3,7 @@ const bodyParser  = require('body-parser'); // with req.body
 const cors = require('cors'); // front end needs this
 const mongoose = require('mongoose');
 const uriUtil = require('mongodb-uri');
+var Collection = require('./api/demoEntries/model/changeCol');
 
 const mongodbURI = 'mongodb://user:p123456@ds263248.mlab.com:63248/heroku_5qkz777p'
 // free sandbox version doesn't automatically provide mongooseURI, so format it
@@ -23,6 +24,8 @@ mongoose.connect(mongooseURI, dbOptions, (err) => {
         console.log("App now running on port", port);
       });
 });
+
+Collection.change("entries");
 
 app.get("/", (req, res) => {
     res.send("Use /api/feedback to GET or POST.\n" +  
