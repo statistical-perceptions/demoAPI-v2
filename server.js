@@ -25,7 +25,9 @@ mongoose.connect(mongooseURI, dbOptions, (err) => {
       });
 });
 
-Collection.change("entries");
+// changing which collection to point at
+var col = "entries"
+Collection.changeTo(col);
 
 app.get("/", (req, res) => {
     res.send("Use /api/feedback to GET or POST.\n" +  
