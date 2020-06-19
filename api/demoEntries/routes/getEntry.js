@@ -17,7 +17,7 @@ router.route('/:col')
             q1: { type: String, required: false},
             q2: { type: String, required: false},
             q3: { type: String, required: false}},
-            { collection : col });
+            { collection : col.toString });
         // Collection.changeTo(col);
         // var Entry = require('../model/demoEntry');
         // provide an object with find, you can specify what we want to find
