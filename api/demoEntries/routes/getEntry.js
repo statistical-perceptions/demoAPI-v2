@@ -10,6 +10,7 @@ const router = express.Router();
 router.route('/')
     .get((req, res) => {
         const col = req.query.col;
+        console.log(col);
         Collection.changeTo(col);
         const Entry = require('../model/demoEntry');
         // provide an object with find, you can specify what we want to find
