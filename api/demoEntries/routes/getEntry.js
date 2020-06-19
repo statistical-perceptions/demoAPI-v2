@@ -8,7 +8,7 @@ const Collection = require('../model/changeCol');
 const router = express.Router();
 
 // '/' is based on /api/feedback
-router.route('/:col')
+router.route('/')
     .get((req, res) => {
         const col = req.params.col;
         Collection.changeTo(col);
