@@ -9,9 +9,9 @@ const router = express.Router();
 // '/' is based on /api/feedback
 router.route('/')
     .get((req, res) => {
-        const col = req.params.col;
+        var col = req.body["col"];
         Collection.changeTo(col);
-        const Entry = require('../model/demoEntry');
+        var Entry = require('../model/demoEntry');
         // provide an object with find, you can specify what we want to find
         Entry.find({}, (err, entries) => {
             if (err) {
