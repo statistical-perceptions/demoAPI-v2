@@ -13,7 +13,7 @@ router.route('/')
         Collection.changeTo(col);
         const Entry = require('../model/demoEntry');
         // provide an object with find, you can specify what we want to find
-        Entry.find({}, (err, entries) => {
+        Entry.find({ col }, (err, entries) => {
             if (err) {
                 res.status(400).json(err);
             };
