@@ -4,7 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 // const Collection = require('../model/changeCol');
 // var Entry = require('../model/demoEntry');
-const Schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 // use router to manage relative paths
 const router = express.Router();
 
@@ -15,15 +15,14 @@ router.route('/')
         // var theKeys = Object.keys(reqBody);
         // var col_name = reqBody[theKeys[0]];
         // Collection.changeTo(col);
-        const demoEntrySchema = new Schema({
+        var demoEntrySchema = new Schema({
             userID: { type: String, required: true},
             sliderVal: { type: String, required: true},
             q1: { type: String, required: false},
             q2: { type: String, required: false},
             q3: { type: String, required: false}},
             { collection : "entries"});
-        const Entry = mongoose.model('Entry', demoEntrySchema);
-        const Model = new Entry()
+        var Entry = mongoose.model('Entry', demoEntrySchema);
         // provide an object with find, you can specify what we want to find
         Entry.find({}, (err, entries) => {
             if (err) {
