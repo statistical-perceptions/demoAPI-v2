@@ -10,14 +10,10 @@ const router = express.Router();
 // '/' is based on /api/feedback
 router.route('/')
     .get((req, res) => {
-        const col = req.body["col"];
-        const generalSchema = new Schema({
-            userID: { type: String, required: false},
-            sliderVal: { type: String, required: false},
-            q1: { type: String, required: false},
-            q2: { type: String, required: false},
-            q3: { type: String, required: false}},
-            { collection : col });
+        const reqBody = req.body;
+        var theKeys = Object.keys(reqBody);
+        var col_name = reqBody[theKeys[0]];
+        const generalSchema = new Schema({ collection : col_name });
         // Collection.changeTo(col);
         // var Entry = require('../model/demoEntry');
         // provide an object with find, you can specify what we want to find
