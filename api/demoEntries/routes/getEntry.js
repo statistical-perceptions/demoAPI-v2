@@ -2,7 +2,6 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
-const Entry = require('../model/demoEntry');
 const Collection = require('../model/changeCol');
 // use router to manage relative paths
 const router = express.Router();
@@ -12,6 +11,7 @@ router.route('/')
     .get((req, res) => {
         const col = req.params.col;
         Collection.changeTo(col);
+        const Entry = require('../model/demoEntry');
         // provide an object with find, you can specify what we want to find
         Entry.find({}, (err, entries) => {
             if (err) {
