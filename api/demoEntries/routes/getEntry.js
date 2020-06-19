@@ -7,9 +7,9 @@ const Collection = require('../model/changeCol');
 const router = express.Router();
 
 // '/' is based on /api/feedback
-router.route('/')
+router.route('/:col')
     .get((req, res) => {
-        var col = req.body["col"];
+        var col = req.params.col;
         Collection.changeTo(col);
         var Entry = require('../model/demoEntry');
         // provide an object with find, you can specify what we want to find
