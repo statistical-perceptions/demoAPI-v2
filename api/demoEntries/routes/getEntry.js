@@ -22,7 +22,8 @@ router.route('/')
             q2: { type: String, required: false},
             q3: { type: String, required: false}},
             { collection : "entries"});
-        var Entry = mongoose.model('Entry', demoEntrySchema);
+        const Entry = mongoose.model('Entry', demoEntrySchema);
+        const Model = new Entry()
         // provide an object with find, you can specify what we want to find
         Entry.find({}, (err, entries) => {
             if (err) {
