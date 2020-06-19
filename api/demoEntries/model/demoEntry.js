@@ -12,7 +12,7 @@ const demoEntrySchema = new Schema({
     q1: { type: String, required: false},
     q2: { type: String, required: false},
     q3: { type: String, required: false}},
-    { collection : Collection.col_name});
+    { collection : "entries"});
 
 // use Entry to reference our model in other files.
 module.exports = mongoose.model('Entry', demoEntrySchema);
