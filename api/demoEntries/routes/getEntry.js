@@ -8,9 +8,9 @@ const Schema = mongoose.Schema;
 const router = express.Router();
 
 // '/' is based on /api/feedback
-router.route('/:col')
+router.route('/')
     .get((req, res) => {
-        const col = req.params.col;
+        const col = req.body["col"];
         const generalSchema = new Schema({
             userID: { type: String, required: false},
             sliderVal: { type: String, required: false},
