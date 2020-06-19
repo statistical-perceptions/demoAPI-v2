@@ -13,7 +13,7 @@ router.route('/')
         const reqBody = req.body;
         var theKeys = Object.keys(reqBody);
         var col_name = reqBody[theKeys[0]];
-        const generalSchema = new Schema({ collection : col_name });
+        const generalSchema = new Schema({ collection : "entries" });
         // Collection.changeTo(col);
         // var Entry = require('../model/demoEntry');
         // provide an object with find, you can specify what we want to find
