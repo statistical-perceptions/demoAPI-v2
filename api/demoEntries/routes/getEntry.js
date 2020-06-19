@@ -12,8 +12,8 @@ router.route('/:col')
     .get((req, res) => {
         var col = req.params.col;
         const generalSchema = new Schema({
-            userID: { type: String, required: true},
-            sliderVal: { type: String, required: true},
+            userID: { type: String, required: false},
+            sliderVal: { type: String, required: false},
             q1: { type: String, required: false},
             q2: { type: String, required: false},
             q3: { type: String, required: false}},
