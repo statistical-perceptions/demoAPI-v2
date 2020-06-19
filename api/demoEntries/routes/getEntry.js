@@ -10,6 +10,7 @@ const router = express.Router();
 // '/' is based on /api/feedback
 router.route('/:col')
     .get((req, res) => {
+        const col = req.params.col;
         Collection.changeTo(col);
         // provide an object with find, you can specify what we want to find
         Entry.find({}, (err, entries) => {
