@@ -7,27 +7,19 @@ const mongoose = require('mongoose');
 // use router to manage relative paths
 const router = express.Router();
 
+const mongodbURI = 'mongodb://user:p123456@ds263248.mlab.com:63248/heroku_5qkz777p'
+const conn = mongoose.createConnection(mongodbURI);
+
 // '/' is based on /api/feedback
 router.route('/:col')
     .get((req, res) => {
         const col_name = req.params.col;
-        // Collection.changeTo(col);
-        // var Entry = require('../model/demoEntry');
-        var Schema = mongoose.Schema;
-        var demoEntrySchema = new Schema({
-            userID: { type: String, required: false},
-            sliderVal: { type: String, required: false},
-            q1: { type: String, required: false},
-            q2: { type: String, required: false},
-            q3: { type: String, required: false}},
-            { collection : col_name });
-        var Entry = mongoose.model('Entry', demoEntrySchema);
-        // provide an object with find, you can specify what we want to find
-        Entry.find({}, (err, entries) => {
+        const coll = conn.collection(col_name);
+        coll.find().toArray(function(err, info) {
             if (err) {
                 res.status(400).json(err);
             };
-            res.json(entries);
+            res.json(info);
         });
     });
 
