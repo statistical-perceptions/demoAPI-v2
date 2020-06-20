@@ -17,7 +17,7 @@ app.use(cors());
 const hostname = 'localhost';
 const dev_port = 3000;
 
-var ENV = 'dev';
+var ENV = 'prod';
 
 mongoose.connect(mongooseURI, dbOptions, (err) => {
     if (err) {
@@ -49,9 +49,10 @@ app.get("/", (req, res) => {
     "GET specific userID, PUT or DELTE.");
 });
 
-app.use('/api/feedback', require('./api/demoEntries/routes/postEntry'));
-app.use('/api/feedback', require('./api/demoEntries/routes/getEntry'));
-app.use('/api/feedback', require('./api/demoEntries/routes/getSpecificEntry'));
-app.use('/api/feedback', require('./api/demoEntries/routes/deleteEntry'));
-app.use('/api/feedback', require('./api/demoEntries/routes/putEntry'));
+// app.use('/api/feedback', require('./api/demoEntries/routes/postEntry'));
+// app.use('/api/feedback', require('./api/demoEntries/routes/getEntry'));
+// app.use('/api/feedback', require('./api/demoEntries/routes/getSpecificEntry'));
+// app.use('/api/feedback', require('./api/demoEntries/routes/deleteEntry'));
+// app.use('/api/feedback', require('./api/demoEntries/routes/putEntry'));
+app.use('/api/feedback', require('./api/demoEntries/routes/getColEntry'));
 
