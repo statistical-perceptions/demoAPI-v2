@@ -14,15 +14,29 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+const hostname = 'localhost';
+const dev_port = 3000;
+
+var ENV = 'dev';
+
 mongoose.connect(mongooseURI, dbOptions, (err) => {
     if (err) {
         console.log(err);
     };
-    // console.log(`Server is running on http://${hostname}:${port}`);
-    var server = app.listen(process.env.PORT, function () {
-        var port = server.address().port;
-        console.log("App now running on port", port);
-      });
+
+    var server;
+
+    if (ENV == 'prod') {
+        var server = app.listen(process.env.PORT, function () {
+            var port = server.address().port;
+            console.log("App now running on port", port);
+        });
+    } else {
+        var server = app.listen(dev_port, function () {
+            // var port = server.address().port;
+            console.log(`Server is running at http://${hostname}:${dev_port}`);
+        });
+    };
 });
 
 // changing which collection to point at
