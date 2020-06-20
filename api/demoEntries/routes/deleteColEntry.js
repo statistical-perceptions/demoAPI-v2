@@ -9,15 +9,18 @@ const conn = mongoose.createConnection(mongodbURI);
 
 // '/' is based on /api/feedback
 router.route('/:col/:userID')
-    .get((req, res) => {
+    .delete((req, res) => {
         const col_name = req.params.col;
-        const coll = conn.collection(col_name);
         const userID = req.params.userID;
-        coll.find({ userID }).toArray(function(err, info) {
+        const coll = conn.collection(col_name);
+        coll.findOneAndDelete({ userID }, (err, entry) => {
             if (err) {
                 res.status(400).json(err);
             };
-            res.json(info);
+            if (!entry) {
+                res.status(404).json({ message: 'Entry not found.' });
+            };
+            res.json({ message: `Entry with userID: ${userID} deleted.`});
         });
     });
 

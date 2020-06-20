@@ -3,7 +3,6 @@ const bodyParser  = require('body-parser'); // with req.body
 const cors = require('cors'); // front end needs this
 const mongoose = require('mongoose');
 const uriUtil = require('mongodb-uri');
-var Collection = require('./api/demoEntries/model/changeCol');
 
 const mongodbURI = 'mongodb://user:p123456@ds263248.mlab.com:63248/heroku_5qkz777p'
 // free sandbox version doesn't automatically provide mongooseURI, so format it
@@ -54,5 +53,8 @@ app.get("/", (req, res) => {
 // app.use('/api/feedback', require('./api/demoEntries/routes/getSpecificEntry'));
 // app.use('/api/feedback', require('./api/demoEntries/routes/deleteEntry'));
 // app.use('/api/feedback', require('./api/demoEntries/routes/putEntry'));
+app.use('/api/feedback', require('./api/demoEntries/routes/getCol'));
 app.use('/api/feedback', require('./api/demoEntries/routes/getColEntry'));
-
+app.use('/api/feedback', require('./api/demoEntries/routes/deleteColEntry'));
+app.use('/api/feedback', require('./api/demoEntries/routes/postColEntry'));
+app.use('/api/feedback', require('./api/demoEntries/routes/putColEntry'));

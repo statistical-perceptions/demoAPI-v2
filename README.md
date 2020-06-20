@@ -46,4 +46,11 @@ You can use the mongo shell credentials on mongodb to access the database throug
 6/18
 About to a functionality that lets researchers create collections on mongodb and connect with that collection.
  
-
+### API INSTRUCTION ###
+GET: 
+    - get data from entire collection
+    - get one entry from collection
+DELETE:
+    - delete one entry from collection 
+POST:
+    - post one entry to a collection (you need to specify which collection you want to post to in json body)
