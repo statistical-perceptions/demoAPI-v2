@@ -4,7 +4,9 @@ const cors = require('cors'); // front end needs this
 const mongoose = require('mongoose');
 const uriUtil = require('mongodb-uri');
 
-const mongodbURI = 'mongodb://user:p123456@ds263248.mlab.com:63248/heroku_5qkz777p'
+// establishing connection
+var mongodb = require('./api/demoEntries/model/mongoURI');
+var mongodbURI = mongodb.URI;
 // free sandbox version doesn't automatically provide mongooseURI, so format it
 const mongooseURI = uriUtil.formatMongoose(mongodbURI);
 const dbOptions = {};
@@ -16,7 +18,7 @@ app.use(cors());
 const hostname = 'localhost';
 const dev_port = 3000;
 
-var ENV = 'prod';
+var ENV = 'dev';
 
 mongoose.connect(mongooseURI, dbOptions, (err) => {
     if (err) {
@@ -42,10 +44,16 @@ mongoose.connect(mongooseURI, dbOptions, (err) => {
 // var col = "entries"
 // Collection.changeTo(col);
 
+const conn = mongoose.createConnection(mongodbURI);
+
 app.get("/", (req, res) => {
     res.send("Use /api/feedback to GET or POST.\n" +  
     "Use /api/feedback/:userID (example: /api/feedback/test03) to "+ 
     "GET specific userID, PUT or DELTE.");
+});
+
+app.get("/api/feedback", (req, res) => {
+    res.send(conn.collections);
 });
 
 // app.use('/api/feedback', require('./api/demoEntries/routes/postEntry'));

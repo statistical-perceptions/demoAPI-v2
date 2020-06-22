@@ -4,7 +4,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 const Entry = require('../model/demoEntry');
-const mongodbURI = 'mongodb://user:p123456@ds263248.mlab.com:63248/heroku_5qkz777p'
+
+// establishing connection
+var mongodb = require('../model/mongoURI');
+var mongodbURI = mongodb.URI;
 const conn = mongoose.createConnection(mongodbURI);
 
 // '/' is based on /api/feedback
