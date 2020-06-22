@@ -5,6 +5,8 @@ GET:
 
     - get one entry from collection. Use https://test-api-615.herokuapp.com/api/feedback/put-in-collection-name/put-in-entry-userID
 
+    - get all collections in the database. Use http://localhost:3000/api/collections.
+
 DELETE:
 
     - delete one entry from collection. Use https://test-api-615.herokuapp.com/api/feedback/put-in-collection-name/put-in-entry-userID

@@ -18,7 +18,7 @@ app.use(cors());
 const hostname = 'localhost';
 const dev_port = 3000;
 
-var ENV = 'prod';
+var ENV = 'dev';
 
 mongoose.connect(mongooseURI, dbOptions, (err) => {
     if (err) {
@@ -40,29 +40,15 @@ mongoose.connect(mongooseURI, dbOptions, (err) => {
     };
 });
 
-// changing which collection to point at
-// var col = "entries"
-// Collection.changeTo(col);
-
 const conn = mongoose.createConnection(mongodbURI);
 
 app.get("/", (req, res) => {
-    res.send("Use /api/feedback to GET or POST.\n" +  
-    "Use /api/feedback/:userID (example: /api/feedback/test03) to "+ 
-    "GET specific userID, PUT or DELTE.");
+    res.send("Use /api/feedback/collection_name/some_userID");
 });
 
-app.get("/api/feedback", (req, res) => {
-    res.send(conn.collections);
-});
-
-// app.use('/api/feedback', require('./api/demoEntries/routes/postEntry'));
-// app.use('/api/feedback', require('./api/demoEntries/routes/getEntry'));
-// app.use('/api/feedback', require('./api/demoEntries/routes/getSpecificEntry'));
-// app.use('/api/feedback', require('./api/demoEntries/routes/deleteEntry'));
-// app.use('/api/feedback', require('./api/demoEntries/routes/putEntry'));
 app.use('/api/feedback', require('./api/demoEntries/routes/getCol'));
 app.use('/api/feedback', require('./api/demoEntries/routes/getColEntry'));
 app.use('/api/feedback', require('./api/demoEntries/routes/deleteColEntry'));
 app.use('/api/feedback', require('./api/demoEntries/routes/postColEntry'));
 app.use('/api/feedback', require('./api/demoEntries/routes/putColEntry'));
+app.use('/api', require('./api/demoEntries/routes/cols'));
