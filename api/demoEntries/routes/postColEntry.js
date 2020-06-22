@@ -23,15 +23,15 @@ router.route('/:col')
                 items.forEach(function(item) {
                     col_names.push(item["name"]);
                 });
+                if (err) {
+                    res.status(400).json(err);
+                };
+                if (col_names.includes(col_name)) {
+                    res.json(entry);
+                } else {
+                    res.json({ message: `Collection (${col_name}) not found.` });
+                };
             });
-            if (err) {
-                res.status(400).json(err);
-            };
-            if (col_names.includes(col_name)) {
-                res.json(entry);
-            } else {
-                res.json({ message: `Collection (${col_name}) not found.` });
-            };
         });
     });
 

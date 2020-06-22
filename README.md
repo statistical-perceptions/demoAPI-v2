@@ -1,3 +1,26 @@
+### API INSTRUCTION ###
+GET: 
+
+    - get data from entire collection. Use https://test-api-615.herokuapp.com/api/feedback/put-in-collection-name
+
+    - get one entry from collection. Use https://test-api-615.herokuapp.com/api/feedback/put-in-collection-name/put-in-entry-userID
+
+DELETE:
+
+    - delete one entry from collection. Use https://test-api-615.herokuapp.com/api/feedback/put-in-collection-name/put-in-entry-userID
+
+POST:
+
+    - post one entry to a collection. Use https://test-api-615.herokuapp.com/api/feedback/put-in-collection-name. In body, use the following format: {"userID": "your-userID:, "sliderVal": "your-sliderVal", "q1": "answer", "q2": "answer", "q3": "answer"}. Note that q1, q2, q3 are not required. 
+
+PUT: 
+
+    - udpate one entry inside a specific collection. Use https://test-api-615.herokuapp.com/api/feedback/put-in-collection-name/put-in-entry-userID. In body, specify the key value pair you want to update, such as {"sliderVal", "new-sliderVal"}.
+
+
+
+### Dev Log ###
+
 Login to heroku with ```heroku login```
 
 Set up package.json first with: ``` npm init ```
@@ -45,12 +68,3 @@ You can use the mongo shell credentials on mongodb to access the database throug
 
 6/18
 About to a functionality that lets researchers create collections on mongodb and connect with that collection.
- 
-### API INSTRUCTION ###
-GET: 
-    - get data from entire collection
-    - get one entry from collection
-DELETE:
-    - delete one entry from collection 
-POST:
-    - post one entry to a collection (you need to specify which collection you want to post to in json body)
