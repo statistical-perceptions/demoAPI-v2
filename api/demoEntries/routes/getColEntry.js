@@ -18,7 +18,6 @@ router.route('/:col/:userID')
         var ID_array = [];
         coll.find({}).toArray(function(err, items) {
             items.forEach(function(item) {
-                console.log(item);
                 ID_array.push(item["userID"]);
             });
             coll.find({ userID }).toArray(function(err, info) {
@@ -28,11 +27,10 @@ router.route('/:col/:userID')
                 if (ID_array.includes(userID)) {
                     res.json(info);
                 } else {
-                    res.json({ message: `Entry with userID ${userID} not found in collection ${col_name}`})
+                    res.json({ message: `Entry with userID (${userID}) not found in collection (${col_name})`});
                 };
             });
         });
-        
     });
 
 module.exports = router;

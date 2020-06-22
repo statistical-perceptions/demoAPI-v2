@@ -9,24 +9,28 @@ const router = express.Router();
 var mongodb = require('../model/mongoURI');
 var mongodbURI = mongodb.URI;
 const conn = mongoose.createConnection(mongodbURI);
-const db = conn.db;
 
 // '/' is based on /api/feedback
 router.route('/:col')
     .get((req, res) => {
         const col_name = req.params.col;
-        // db.listCollections().toArray(function(err, items) {
-        //     console.log(items);
-        // })
-        // console.log(db.listCollections);
-
+        const db = conn.db;
         const coll = conn.collection(col_name);
-        // console.log(coll);
+        var col_names = [];
         coll.find().toArray(function(err, collection) {
-            if (err) {
-                res.status(400).json(err);
-            };
-            res.json(collection);   
+            db.listCollections().toArray(function(err, items) {
+                items.forEach(function(item) {
+                    col_names.push(item["name"]);
+                });
+                if (err) {
+                    res.status(400).json(err);
+                };
+                if (col_names.includes(col_name)) {
+                    res.json(collection);   
+                } else {
+                    res.json({ message: `Collection (${col_name}) not found.` });
+                };
+            });
         });
     });
 

@@ -16,14 +16,23 @@ router.route('/:col/:userID')
         const col_name = req.params.col;
         const coll = conn.collection(col_name);
         const userID = req.params.userID;
-        // note that { userID } is simplified from { userID:userID }
-        coll.findOneAndUpdate({ userID }, { $set: req.body }, function(err) {
+        var ID_array = [];
+        coll.find({}).toArray(function(err, items) {
+            items.forEach(function(item) {
+                ID_array.push(item["userID"]);
+            });
+            // note that { userID } is simplified from { userID:userID }
+            coll.findOneAndUpdate({ userID }, { $set: req.body }, function(err) {
                 if (err) {
                     res.status(400).json(err);
                 };
-                // res.json({ message: `Entry ${entry.userID} udpated.`});
-                res.json({ message: `Entry with userID: ${userID} updated.`});
+                if (ID_array.includes(userID)) {
+                    res.json({ message: `Entry with userID (${userID}) updated.`});
+                } else {
+                    res.json({ message: `Entry with userID (${userID}) not found in collection (${col_name})`});
+                }; 
             });
+        });
     });
 
 module.exports = router;

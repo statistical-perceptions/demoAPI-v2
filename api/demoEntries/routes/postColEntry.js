@@ -14,13 +14,24 @@ const conn = mongoose.createConnection(mongodbURI);
 router.route('/:col')
     .post((req, res) => {
         const col_name = req.params.col;
+        const db = conn.db;
         const coll = conn.collection(col_name);
         const entry = Entry(req.body);
+        var col_names = [];
         coll.insertOne(entry, function(err) {
+            db.listCollections().toArray(function(err, items) {
+                items.forEach(function(item) {
+                    col_names.push(item["name"]);
+                });
+            });
             if (err) {
                 res.status(400).json(err);
             };
-            res.json(entry);
+            if (col_names.includes(col_name)) {
+                res.json(entry);
+            } else {
+                res.json({ message: `Collection (${col_name}) not found.` });
+            };
         });
     });
 
