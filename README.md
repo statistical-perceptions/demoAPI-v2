@@ -70,3 +70,9 @@ You can use the mongo shell credentials on mongodb to access the database throug
 
 6/18
 About to a functionality that lets researchers create collections on mongodb and connect with that collection.
+
+Add mongodb nodejs driver
+``` 
+npm install mongodb 
+npm update
+```

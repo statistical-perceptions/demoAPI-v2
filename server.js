@@ -18,7 +18,7 @@ app.use(cors());
 const hostname = 'localhost';
 const dev_port = 3000;
 
-var ENV = 'prod';
+var ENV = 'dev';
 
 mongoose.connect(mongooseURI, dbOptions, (err) => {
     if (err) {
