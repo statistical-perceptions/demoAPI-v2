@@ -3,7 +3,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
-const Entry = require('../model/demoEntry');
+// const Entry = require('../model/demoEntry');
 
 // establishing connection
 var mongodb = require('../model/mongoURI');
@@ -16,7 +16,8 @@ router.route('/:col')
         const col_name = req.params.col;
         const db = conn.db;
         const coll = conn.collection(col_name);
-        const entry = Entry(req.body);
+        // const entry = Entry(req.body);
+        const entry = req.body;
         var col_names = [];
         coll.insertOne(entry, function(err) {
             db.listCollections().toArray(function(err, items) {
