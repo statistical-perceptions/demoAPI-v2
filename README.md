@@ -26,13 +26,17 @@ POST:
     Use https://test-api-615.herokuapp.com/api/feedback/put-in-collection-name. 
     
     In body, use the following format: 
-    ```{"userID": "your-userID:, "sliderVal": "your-sliderVal", "q1": "answer", "q2": "answer", "q3": "answer"}. 
-    ```
+    {"userID": "your-userID:, "sliderVal": "your-sliderVal", "q1": "answer", "q2": "answer", "q3": "answer"}. 
+
     Note that q1, q2, q3 are not required. 
 
 PUT: 
 
-    udpate one entry inside a specific collection. Use https://test-api-615.herokuapp.com/api/feedback/put-in-collection-name/put-in-entry-userID. In body, specify the key value pair you want to update, such as {"sliderVal", "new-sliderVal"}.
+    udpate one entry inside a specific collection. 
+    
+    Use https://test-api-615.herokuapp.com/api/feedback/put-in-collection-name/put-in-entry-userID. 
+    
+    In body, specify the key value pair you want to update, such as {"sliderVal", "new-sliderVal"}.
 
 
 
