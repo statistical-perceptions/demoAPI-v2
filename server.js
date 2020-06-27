@@ -1,5 +1,5 @@
 const express = require('express');
-const bodyParser  = require('body-parser'); // with req.body
+const bodyParser = require('body-parser'); // with req.body
 const cors = require('cors'); // front end needs this
 const mongoose = require('mongoose');
 const uriUtil = require('mongodb-uri');
@@ -28,12 +28,12 @@ mongoose.connect(mongooseURI, dbOptions, (err) => {
     var server;
 
     if (ENV == 'prod') {
-        var server = app.listen(process.env.PORT, function () {
+        var server = app.listen(process.env.PORT, function() {
             var port = server.address().port;
             console.log("App now running on port", port);
         });
     } else {
-        var server = app.listen(dev_port, function () {
+        var server = app.listen(dev_port, function() {
             // var port = server.address().port;
             console.log(`Server is running at http://${hostname}:${dev_port}`);
         });
