@@ -3,7 +3,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
-const Entry = require('../model/demoEntry');
+// const Entry = require('../model/demoEntry');
 
 // establishing connection
 var mongodb = require('../model/mongoURI');
@@ -27,10 +27,10 @@ router.route('/:col/:userID')
                     res.status(400).json(err);
                 };
                 if (ID_array.includes(userID)) {
-                    res.json({ message: `Entry with userID (${userID}) updated.`});
+                    res.json({ message: `Entry with userID (${userID}) updated.` });
                 } else {
-                    res.json({ message: `Entry with userID (${userID}) not found in collection (${col_name})`});
-                }; 
+                    res.json({ message: `Entry with userID (${userID}) not found in collection (${col_name})` });
+                };
             });
         });
     });
