@@ -1,9 +1,9 @@
 const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const mongoose = require("mongoose");
-const User = require("../model/authEntry");
+// const User = require("../model/authEntry");
 
-const mongoURI = require("../../../config/mongoURI");
+const mongoURI = require("./mongoURI");
 const mongoDB = mongoURI.URI;
 const conn = mongoose.createConnection(mongoDB);
 const coll = conn.collection('register');

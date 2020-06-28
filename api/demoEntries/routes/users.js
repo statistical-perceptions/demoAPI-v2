@@ -9,6 +9,8 @@ const mongoDB = mongoURI.URI;
 const conn = mongoose.createConnection(mongoDB);
 const coll = conn.collection('register');
 
+const key = require("../../../config/key");
+
 // Load input validation
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
@@ -74,11 +76,12 @@ router.route('/login')
                     // User matched
                     // Create JWT Payload
                     const payload = {
-                        id: user.id.$oid,
+                        // id: user.id.$oid,
+                        id: user._id,
                         username: user.username
                     };
 
-                    jwt.sign(payload, keys.secretOrKey,
+                    jwt.sign(payload, key.secretOrKey,
                         {
                           expiresIn: 31556926 // 1 year in seconds
                         },

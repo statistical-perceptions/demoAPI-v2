@@ -23,6 +23,7 @@
     "mongodb": "^3.5.9",
     "mongodb-uri": "^0.9.7",
     "mongoose": "^5.9.20",
+    "nodemon": "^2.0.4",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "validator": "^13.1.1"
