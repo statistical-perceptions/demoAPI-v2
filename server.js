@@ -3,6 +3,7 @@ const bodyParser = require('body-parser'); // with req.body
 const cors = require('cors'); // front end needs this
 const mongoose = require('mongoose');
 const uriUtil = require('mongodb-uri');
+const passport = require('passport');
 
 // establishing connection
 var mongodb = require('./config/mongoURI');
@@ -40,7 +41,8 @@ mongoose.connect(mongooseURI, dbOptions, (err) => {
     };
 });
 
-const conn = mongoose.createConnection(mongodbURI);
+app.use(passport.initialize());
+require('./config/passport')(passport);
 
 app.get("/", (req, res) => {
     res.send("Use /api/feedback/collection_name/some_userID");
