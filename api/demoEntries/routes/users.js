@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const mongoURI = require("../model/mongoURI");
+const mongoURI = require("../../../config/mongoURI");
 const mongoDB = mongoURI.URI;
 const conn = mongoose.createConnection(mongoDB);
 
@@ -25,18 +25,56 @@ router.route('/register')
 
         const coll = conn.collection('register');
 
+        // potential place for an error. .then
+        coll.findOne({ username: req.body.username }).then(user => {
+            if (user) {
+                return res.status(400).json({ message: "Username already exists" });
+              } else {
+                    const newUser = new User({
+                      username: req.body.usernmae,
+                      password: req.body.password
+                    });
+
+                    // encrypt password
+                    bcrypt.genSalt(10, (err, salt) => {
+                        bcrypt.hash(newUser.password, salt, (err, hash) => {
+                            if (err) throw err;
+                            newUser.password = hash;
+                            coll.insertOne(newUser, function(err) {
+                                if (err) {
+                                    res.status(400).json(err);
+                                } else {
+                                    res.json(newUser);
+                                };
+                            })
+                            //   newUser
+                            //     .save()
+                            //     .then(user => res.json(user))
+                            //     .catch(err => console.log(err));
+                        });
+                    });
+                };
+        });
+
+        // User.findOne({ username: req.body.username }).then(user => {
+        //     if (user) {
+        //       return res.status(400).json({ message: "Username already exists" });
+        //     } else {
+        //         const newUser = new User({
+        //             username: req.body.usernmae,
+        //             password: req.body.password
+        //         });
+        //     };
+        // });
+    });
+
+
+router.route('/login')
+    .post((req, res) => {
+        const { errors, isValid } = validateLoginInput(req.body);
+
         
 
-        User.findOne({ username: req.body.username }).then(user => {
-            if (user) {
-              return res.status(400).json({ message: "Username already exists" });
-            } else {
-                const newUser = new User({
-                    username: req.body.usernmae,
-                    password: req.body.password
-                });
-            };
-        });
     });
 
 module.exports = router;

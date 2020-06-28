@@ -6,7 +6,7 @@ const router = express.Router();
 // const Entry = require('../model/demoEntry');
 
 // establishing connection
-var mongodb = require('../model/mongoURI');
+var mongodb = require('../../../config/mongoURI');
 var mongodbURI = mongodb.URI;
 const conn = mongoose.createConnection(mongodbURI);
 

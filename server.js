@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const uriUtil = require('mongodb-uri');
 
 // establishing connection
-var mongodb = require('./api/demoEntries/model/mongoURI');
+var mongodb = require('./config/mongoURI');
 var mongodbURI = mongodb.URI;
 // free sandbox version doesn't automatically provide mongooseURI, so format it
 const mongooseURI = uriUtil.formatMongoose(mongodbURI);
