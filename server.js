@@ -18,7 +18,7 @@ app.use(cors());
 const hostname = 'localhost';
 const dev_port = 3000;
 
-var ENV = 'prod';
+var ENV = 'dev';
 
 mongoose.connect(mongooseURI, dbOptions, (err) => {
     if (err) {
@@ -52,3 +52,4 @@ app.use('/api/feedback', require('./api/demoEntries/routes/deleteColEntry'));
 app.use('/api/feedback', require('./api/demoEntries/routes/postColEntry'));
 app.use('/api/feedback', require('./api/demoEntries/routes/putColEntry'));
 app.use('/api', require('./api/demoEntries/routes/cols'));
+app.use('/api', require('./api/demoEntries/routes/users'));

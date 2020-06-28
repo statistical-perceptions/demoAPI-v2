@@ -90,8 +90,13 @@ You can use the mongo shell credentials on mongodb to access the database throug
 6/18
 About to a functionality that lets researchers create collections on mongodb and connect with that collection.
 
-Add mongodb nodejs driver
+Add mongodb nodejs driver to connect to mongodb atlas
 ``` 
 npm install mongodb 
 npm update
+```
+
+Install the following dependencies to enable user authentication:
+```
+npm i bcryptjs body-parser concurrently express is-empty jsonwebtoken mongoose passport passport-jwt validator --save
 ```
