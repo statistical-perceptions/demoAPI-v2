@@ -96,6 +96,11 @@ npm install mongodb
 npm update
 ```
 
+Run the following and start building jwt user authentication into api.  
+```
+npm i bcryptjs body-parser concurrently express is-empty jsonwebtoken mongoose passport passport-jwt validator --save
+```
+
 Install the following dependencies to enable user authentication:
 ```
 npm i bcryptjs body-parser concurrently express is-empty jsonwebtoken mongoose passport passport-jwt validator --save
