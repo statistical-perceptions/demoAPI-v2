@@ -23,13 +23,6 @@ module.exports = passport => {
             };
             return done(null, false);
         }).catch(err => console.log(err)); // for debugging purposes
-
-        // User.findById(jwt_payload.id).then(user => {
-        //     if (user) {
-        //         return done(null, user);
-        //     };
-        //     return done(null, false);
-        // }).catch(err => console.log(err));
     })
   );
 };

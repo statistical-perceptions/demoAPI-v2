@@ -17,9 +17,10 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const hostname = 'localhost';
-const dev_port = 3000;
+const dev_port = 5000;
 
-var ENV = 'prod';
+// Change ENV to dev for debugging and prod for deployment
+var ENV = 'dev';
 
 mongoose.connect(mongooseURI, dbOptions, (err) => {
     if (err) {

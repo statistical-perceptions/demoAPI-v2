@@ -29,7 +29,7 @@ router.route('/register')
         // potential place for an error. .then
         coll.findOne({ username: req.body.username }).then(user => {
             if (user) {
-                return res.status(400).json({ message: "Username already exists" });
+                return res.status(400).json({ userExists: "Username already exists" });
             } else {
                 const newUser = new User({
                     username: req.body.username,
@@ -68,7 +68,7 @@ router.route('/login')
 
         coll.findOne({ username }).then(user => {
             if (!user) {
-                return res.status(404).json({ message: "Username not found" });
+                return res.status(404).json({ userNotFound: "Username not found" });
             };
 
             bcrypt.compare(password, user.password).then(isMatch => {
@@ -95,7 +95,7 @@ router.route('/login')
                 } else {
                     return res
                         .status(400)
-                        .json({ message: "Password incorrect" });
+                        .json({ pwdIncorrect: "Password incorrect" });
                 };
             });
         });
