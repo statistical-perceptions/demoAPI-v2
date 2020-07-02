@@ -2,29 +2,37 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
+const MongoClient = require('mongodb').MongoClient;
 // use router to manage relative paths
 const router = express.Router();
 
 // establishing connection
 var mongodb = require('../../../config/mongoURI');
 var mongodbURI = mongodb.URI;
-const conn = mongoose.createConnection(mongodbURI);
 
-// '/' is based on /
-router.route('/collections')
+// '/' is based on /api
+router.route('/:db/collections')
     .get((req, res) => {
-        const db = conn.db;
-        var col_names = [];
-        db.listCollections().toArray(function(err, items) {
-            items.forEach(function(item) {
-                col_names.push(item["name"]);
+        const db_name = req.params.db;
+
+        const atlas = mongodbURI + "/" + db_name 
+            + '?retryWrites=true&w=majority';
+        const client = new MongoClient(atlas, {useNewUrlParser: true});
+        
+        client.connect(e => {
+            const db = client.db(db_name);
+            db.listCollections().toArray(function(err, items) {
+                var col_names = [];
+                items.forEach(function(item) {
+                    col_names.push(item["name"]);
+                });
+                if (err) {
+                    res.status(400).json(err);
+                } else {
+                    res.json(col_names);
+                };
             });
-            if (err) {
-                res.status(400).json(err);
-            } else {
-                res.json(col_names);
-            };
-        });
+        })        
     });
 
 module.exports = router;

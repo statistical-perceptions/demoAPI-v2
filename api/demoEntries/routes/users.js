@@ -3,11 +3,14 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const uriUtil = require('mongodb-uri');
 
-const mongoURI = require("../../../config/mongoURI");
-const mongoDB = mongoURI.URI;
-const conn = mongoose.createConnection(mongoDB);
-const coll = conn.collection('register');
+const mongodb = require("../../../config/mongoURI");
+const mongodbURI = mongodb.URI;
+const atlas = mongodbURI + '/register?retryWrites=true&w=majority'
+const mongooseURI = uriUtil.formatMongoose(atlas);
+const db = mongoose.createConnection(mongooseURI);
+const coll = db.collection('credentials');
 
 const key = require("../../../config/key");
 
@@ -18,6 +21,7 @@ const validateLoginInput = require("../../validation/login");
 // Load User model
 const User = require("../model/authEntry");
 
+// '/' is based on '/api'
 router.route('/register')
     .post((req, res) => {
         const { errors, isValid } = validateRegisterInput(req.body);
@@ -26,7 +30,6 @@ router.route('/register')
             return res.status(400).json(errors);
         };
 
-        // potential place for an error. .then
         coll.findOne({ username: req.body.username }).then(user => {
             if (user) {
                 return res.status(400).json({ userExists: "Username already exists" });
@@ -35,6 +38,9 @@ router.route('/register')
                     username: req.body.username,
                     password: req.body.password
                 });
+
+                // col_name = req.body.username + "-col"
+                // db.createCollection(col_name);
 
                 // encrypt password
                 bcrypt.genSalt(10, (err, salt) => {
