@@ -30,6 +30,14 @@ router.route('/register')
             return res.status(400).json(errors);
         };
 
+        // create a new database for this user
+        const newDB_URI = mongodbURI + '/' + req.body.username
+            + '?retryWrites=true&w=majority' 
+        const newDB_mongooseURI = uriUtil.formatMongoose(newDB_URI);
+        const new_db = mongoose.createConnection(newDB_mongooseURI);
+
+        new_db.createCollection("info");
+
         coll.findOne({ username: req.body.username }).then(user => {
             if (user) {
                 return res.status(400).json({ userExists: "Username already exists" });

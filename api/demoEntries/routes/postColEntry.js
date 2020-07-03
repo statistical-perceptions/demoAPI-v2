@@ -38,7 +38,15 @@ router.route('/:db/:col')
                         }
                     })
                 } else {
-                    res.json({ message: "Collection not found." });
+                    db.createCollection(col_name);
+                    const new_col = db.collection(col_name);
+                    new_col.insertOne(entry, function(err) {
+                        if (err) {
+                            res.status(400).json(err);
+                        } else {
+                            res.json(entry)
+                        }
+                    })
                 };
             });
         });
