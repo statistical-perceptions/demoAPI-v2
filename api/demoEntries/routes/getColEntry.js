@@ -45,11 +45,11 @@ router.route('/:db/:col/:key-:value')
                     })
 
                     if (value_array.includes(value)) {
-                        col.find(query).toArray(function(err, info) {
+                        col.findOne(query, (err, entry) => {
                             if (err) {
                                 res.status(400).json(err);
                             } else {
-                                res.json(info)
+                                res.json(entry);
                             }
                         })
                     } else {
