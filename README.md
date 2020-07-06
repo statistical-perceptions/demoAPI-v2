@@ -1,42 +1,64 @@
 ### API INSTRUCTION ###
+
+Structure of MongoDB Atlas: 
+We use a Cluster. A Cluster consists of Databases, and a Database consists of Collections, and each Collection stores Documents. Each Document has Entries. 
+
+Notation: 
+For ```/:xx```, the ```xx``` that follows the semicolon denotes a variable that you can change when you use this API. Example: ```/:db```. The db here is short for database, and if you wish to access the database named "test", you would put ```/test``` as a snippet in the route. 
+
+For simplicity, the routes mentioned below are rooted on https://test-api-615.herokuapp.com/api. For instance, in the first bullet point below, you would actually request from https://test-api-615.herokuapp.com/api/:db/collections. 
+
+For all examples mentioned below, say we have a database named ```demoDB```, two collections in that database named ```demoCol``` and ```demoCol2```. Inside ```demoCol```, there is a document: ```{ "name": "StormTrooper", "color": "white", "actions": [] }``` and ```{ "name": "LukeSkywalker", "color": "blue", "actions": [] }```.
+
+
 GET: 
 
-    get data from entire collection. 
-    
-    Use https://test-api-615.herokuapp.com/api/feedback/put-in-collection-name
+- Get collection names: /:db/collections
+    - Example: GET from /demoDB/collections returns ```["demoCol", "demoCol2"]```
 
-    get one entry from collection. 
-    
-    Use https://test-api-615.herokuapp.com/api/feedback/put-in-collection-name/put-in-entry-userID
+- Get documents from a collection: /feedback/:db/:col
+    - Example: GET from /feedback/demoDB/demoCol returns ```[{ "name": "StormTrooper", "color": "white", "actions": [{"1": "shoot"}] }, { "name": "LukeSkywalker", "color": "blue", "actions": [] }]```
 
-    get all collections in the database. 
-    
-    Use http://localhost:3000/api/collections.
-
-DELETE:
-
-    delete one entry from collection. 
-    
-    Use https://test-api-615.herokuapp.com/api/feedback/put-in-collection-name/put-in-entry-userID
+- Get a specific document from a collection: /feedback/:db/:col/:key-:value
+    - Example: GET from /feedback/demoDB/demoCol/color-blue returns ```{ "name": "LukeSkywalker", "color": "blue", "actions": [] }```
 
 POST:
 
-    post one entry to a collection. 
-    
-    Use https://test-api-615.herokuapp.com/api/feedback/put-in-collection-name. 
-    
-    In body, use the following format: 
-    {"userID": "your-userID:, "sliderVal": "your-sliderVal", "q1": "answer", "q2": "answer", "q3": "answer"}. 
+- Create a new collection: /:db/createCol/:newCol 
+    - Example: POST to /demoDB/createCol/demoCol3 will create a new collection named ```demoCol3```
 
-    Note that q1, q2, q3 are not required. 
+- Create a new document in a collection: /feedback/:db/:col
+    - Example: POST to /demoDB/demoCol with body ```{ "name": "C3PO", "color": "yellow", "actions": [] }``` will insert that document into demoCol. 
 
 PUT: 
 
-    udpate one entry inside a specific collection. 
-    
-    Use https://test-api-615.herokuapp.com/api/feedback/put-in-collection-name/put-in-entry-userID. 
-    
-    In body, specify the key value pair you want to update, such as {"sliderVal", "new-sliderVal"}.
+- Change the content of a document: /feedback/:db/:col/:key-:value
+    - Example: PUT to /feedback/demoDB/demoCol/name-StormTrooper with body ```{"actions": [{"2": "biubiubiu"}]}``` will change the document to ```[{ "name": "StormTrooper", "color": "white", "actions": [{"2": "biubiubiu"}] }``` This action changes a specific entry within the document. 
+    - Example: PUT to /feedback/demoDB/demoCol/name-StormTrooper with body ```{ "height": "unknown"}``` will change the document to ```[{ "name": "StormTrooper", "color": "white", "actions": ["shoot"], "height": "unknown" }```
+
+- Append to an array in a document's entry: /feedback/:db/:col/:key-:value/:index
+    - Example: PUT to /feedback/demoDB/demoCol/name-StormTrooper/actions with body ```{"2": "biubiubiu"}``` will change the document to ```{ "name": "StormTrooper", "color": "white", "actions": [{"1": "shoot"}, {"2": "biubiubiu"}] }```
+
+DELETE:
+
+- Delete a specific document from a collection: /feedback/:db/:col/:key-:value
+    - Example: DELETE from /feedback/demoDB/demoCol/name-LukeSkyWalker will delete the document with entry ```"name": "LukeSkywalker"```
+
+
+Example code: 
+```
+import axios from "axios";
+axios
+    .get('https://test-api-615.herokuapp.com/api/feedback/demoDB/demoCol');
+    .then(res => {
+        console.log(res);
+    })
+```
+
+
+
+
+
 
 
 

@@ -8,7 +8,7 @@ const MongoClient = require('mongodb').MongoClient;
 var mongodb = require('../../../config/mongoURI');
 var mongodbURI = mongodb.URI;
 
-// '/' is based on /api/feedback\
+// '/' is based on /api/feedback
 // key value pair identifies the specific document
 router.route('/:db/:col/:key-:value/:index')
     .put((req, res) => {
