@@ -57,3 +57,4 @@ app.use('/api/feedback', require('./api/demoEntries/routes/putColEntry'));
 app.use('/api/feedback', require('./api/demoEntries/routes/putColEntryItem'));
 app.use('/api', require('./api/demoEntries/routes/cols'));
 app.use('/api', require('./api/demoEntries/routes/users'));
+app.use('/api', require('./api/demoEntries/routes/createCol'));
