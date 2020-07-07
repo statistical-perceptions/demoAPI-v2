@@ -32,7 +32,7 @@ POST:
 
 PUT: 
 
-- Change the content of a document: **/feedback/:db/:col/**:key-:value
+- Change the content of a document: **/feedback/:db/:col/:key-:value**
     - Example: PUT to **/feedback/demoDB/demoCol/name-StormTrooper** with body ```{"actions": [{"2": "biubiubiu"}]}``` will change the document to ```[{ "name": "StormTrooper", "color": "white", "actions": [{"2": "biubiubiu"}] }``` This action changes a specific entry within the document. 
     - Example: PUT to **/feedback/demoDB/demoCol/name-StormTrooper** with body ```{ "height": "unknown"}``` will change the document to ```[{ "name": "StormTrooper", "color": "white", "actions": ["shoot"], "height": "unknown" }```
 
