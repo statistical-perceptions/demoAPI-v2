@@ -20,33 +20,33 @@ const hostname = 'localhost';
 const dev_port = 5000;
 
 // Change ENV to dev for debugging and prod for deployment
-var ENV = 'dev';
+var ENV = 'prod';
 
 mongoose.connect(mongooseURI, dbOptions, (err) => {
-    if (err) {
-        console.log(err);
-    };
+  if (err) {
+    console.log(err);
+  };
 
-    var server;
+  var server;
 
-    if (ENV == 'prod') {
-        var server = app.listen(process.env.PORT, function() {
-            var port = server.address().port;
-            console.log("App now running on port", port);
-        });
-    } else {
-        var server = app.listen(dev_port, function() {
-            // var port = server.address().port;
-            console.log(`Server is running at http://${hostname}:${dev_port}`);
-        });
-    };
+  if (ENV == 'prod') {
+    var server = app.listen(process.env.PORT, function () {
+      var port = server.address().port;
+      console.log("App now running on port", port);
+    });
+  } else {
+    var server = app.listen(dev_port, function () {
+      // var port = server.address().port;
+      console.log(`Server is running at http://${hostname}:${dev_port}`);
+    });
+  };
 });
 
 app.use(passport.initialize());
 require('./config/passport')(passport);
 
 app.get("/", (req, res) => {
-    res.send("Use /api/feedback/collection_name/some_userID");
+  res.send("Use /api/feedback/collection_name/some_userID");
 });
 
 app.use('/api/feedback', require('./api/demoEntries/routes/getCol'));
