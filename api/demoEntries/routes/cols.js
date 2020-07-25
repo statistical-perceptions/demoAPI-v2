@@ -12,27 +12,27 @@ var mongodbURI = mongodb.URI;
 
 // '/' is based on /api
 router.route('/:db/collections')
-    .get((req, res) => {
-        const db_name = req.params.db;
+  .get((req, res) => {
+    const db_name = req.params.db;
 
-        const atlas = mongodbURI + "/" + db_name 
-            + '?retryWrites=true&w=majority';
-        const client = new MongoClient(atlas, {useNewUrlParser: true});
-        
-        client.connect(e => {
-            const db = client.db(db_name);
-            db.listCollections().toArray(function(err, items) {
-                var col_names = [];
-                items.forEach(function(item) {
-                    col_names.push(item["name"]);
-                });
-                if (err) {
-                    res.status(400).json(err);
-                } else {
-                    res.json(col_names);
-                };
-            });
-        })        
-    });
+    const atlas = mongodbURI + "/" + db_name
+      + '?retryWrites=true&w=majority';
+    const client = new MongoClient(atlas, { useNewUrlParser: true });
+
+    client.connect(e => {
+      const db = client.db(db_name);
+      db.listCollections().toArray(function (err, items) {
+        var col_names = [];
+        items.forEach(function (item) {
+          col_names.push(item["name"]);
+        });
+        if (err) {
+          res.status(400).json(err);
+        } else {
+          res.json(col_names);
+        };
+      });
+    })
+  });
 
 module.exports = router;
