@@ -37,6 +37,7 @@ router.route('/register')
     const new_db = mongoose.createConnection(newDB_mongooseURI);
 
     new_db.createCollection("info");
+    new_db.createCollection("itemData");
 
     coll.findOne({ username: req.body.username }).then(user => {
       if (user) {
