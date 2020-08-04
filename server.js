@@ -55,6 +55,7 @@ app.use('/api/feedback', require('./api/demoEntries/routes/deleteColEntry'));
 app.use('/api/feedback', require('./api/demoEntries/routes/postColEntry'));
 app.use('/api/feedback', require('./api/demoEntries/routes/putColEntry'));
 app.use('/api/feedback', require('./api/demoEntries/routes/putColEntryItem'));
+app.use('/api/feedback', require('./api/demoEntries/routes/putColEntryPutItem'));
 app.use('/api', require('./api/demoEntries/routes/cols'));
 app.use('/api', require('./api/demoEntries/routes/users'));
 app.use('/api', require('./api/demoEntries/routes/createCol'));
