@@ -14,7 +14,7 @@ var mongodbURI = mongodb.URI;
 // '/' is based on /api/feedback
 // key value pair identifies the specific document
 // user/info/studyName-test/experiments/exptName-expt1
-router.route('/:db/:col/:key-:value/:index/:key2-:value2')
+router.route('/:db/:col/:key-:value/:index/:key2-:value2/:infoType')
   .put((req, res) => {
     const db_name = req.params.db;
     const col_name = req.params.col;
@@ -22,6 +22,7 @@ router.route('/:db/:col/:key-:value/:index/:key2-:value2')
     const value = req.params.value;
     const key2 = req.params.key2;
     const value2 = req.params.value2;
+    const infoType = req.params.infoType;
 
     // Connecting to Atlas
     const atlas = mongodbURI + "/" + db_name
@@ -59,10 +60,11 @@ router.route('/:db/:col/:key-:value/:index/:key2-:value2')
               const index = req.params.index;
 
               if (value_array.includes(value)) {
+                const setKey = index + ".$[elem]." + infoType;
                 const filterKey = "elem." + key2;
                 col.findOneAndUpdate(
                   {},
-                  { $set: { "experiments.$[elem].link": req.body.link } },
+                  { $set: { [setKey] : req.body[infoType] } },
                   {
                     multi: true,
                     arrayFilters: [{ [filterKey]: { $eq: value2 } }]
@@ -74,7 +76,7 @@ router.route('/:db/:col/:key-:value/:index/:key2-:value2')
                     } else {
                       res.json({
                         message: `Entry with identifier ` +
-                          `{${key}: ${value}, ${key2}: ${value2}} updated with new link.`
+                          `{${key}: ${value}, ${key2}: ${value2}} updated with new ${infoType}.`
                       })
                     }
                   })
