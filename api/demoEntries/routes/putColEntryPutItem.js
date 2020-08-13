@@ -14,14 +14,15 @@ var mongodbURI = mongodb.URI;
 // '/' is based on /api/feedback
 // key value pair identifies the specific document
 // user/info/studyName-test/experiments/exptName-expt1
-router.route('/:db/:col/:key-:value/:index/:key2-:value2/:infoType')
+router.route('/:db/:col/:key-:value/:index/:keyy-:valuee/:infoType')
   .put((req, res) => {
     const db_name = req.params.db;
     const col_name = req.params.col;
     const key = req.params.key;
     const value = req.params.value;
-    const key2 = req.params.key2;
-    const value2 = req.params.value2;
+    console.log(value);
+    const keyy = req.params.keyy;
+    const valuee = req.params.valuee;
     const infoType = req.params.infoType;
 
     // Connecting to Atlas
@@ -58,26 +59,28 @@ router.route('/:db/:col/:key-:value/:index/:key2-:value2/:infoType')
               })
 
               const index = req.params.index;
+              console.log(value_array);
 
               if (value_array.includes(value)) {
                 const setKey = index + ".$[elem]." + infoType;
-                const filterKey = "elem." + key2;
+                const filterKey = "elem." + keyy;
                 col.findOneAndUpdate(
-                  {},
+                  query,
                   { $set: { [setKey] : req.body[infoType] } },
                   {
                     multi: true,
-                    arrayFilters: [{ [filterKey]: { $eq: value2 } }]
+                    arrayFilters: [{ [filterKey]: { $eq: valuee } }]
                   },
                   (err, info) => {
                     if (err) {
                       // res.status(400).json(err);
                       res.json({ message: "Something went wrong" })
                     } else {
-                      res.json({
-                        message: `Entry with identifier ` +
-                          `{${key}: ${value}, ${key2}: ${value2}} updated with new ${infoType}.`
-                      })
+                      // res.json({
+                      //   message: `Entry with identifier ` +
+                      //     `{${key}: ${value}, ${keyy}: ${valuee}} updated with new ${infoType}.`
+                      // })
+                      res.json(info);
                     }
                   })
               } else {
