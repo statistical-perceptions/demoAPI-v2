@@ -74,7 +74,7 @@ router.route('/:db/:col/:key-:value/:index/:keyy-:valuee/:infoType')
                   (err, info) => {
                     if (err) {
                       // res.status(400).json(err);
-                      res.json({ message: "Something went wrong" })
+                      res.json({ message: "Something went wrong when PUT" })
                     } else {
                       // res.json({
                       //   message: `Entry with identifier ` +

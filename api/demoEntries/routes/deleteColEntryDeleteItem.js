@@ -1,3 +1,6 @@
+// this request is for putting demographics link to an experiment config info 
+// on the config study page
+
 'use strict';
 
 const express = require('express');
@@ -8,15 +11,17 @@ const MongoClient = require('mongodb').MongoClient;
 var mongodb = require('../../../config/mongoURI');
 var mongodbURI = mongodb.URI;
 
-// use this route to add a new experiment to a study's configuration
 // '/' is based on /api/feedback
 // key value pair identifies the specific document
-router.route('/:db/:col/:key-:value/:index')
-  .put((req, res) => {
+// user/info/studyName-test/experiments/exptName-expt1
+router.route('/:db/:col/:key-:value/:index/:keyy-:valuee')
+  .delete((req, res) => {
     const db_name = req.params.db;
     const col_name = req.params.col;
     const key = req.params.key;
     const value = req.params.value;
+    const keyy = req.params.keyy;
+    const valuee = req.params.valuee;
 
     // Connecting to Atlas
     const atlas = mongodbURI + "/" + db_name
@@ -50,22 +55,20 @@ router.route('/:db/:col/:key-:value/:index')
               items.forEach(function (item) {
                 value_array.push(item[key])
               })
-
               const index = req.params.index;
-
               if (value_array.includes(value)) {
-                col.findOneAndUpdate(query,
-                  { $push: { [index]: req.body } },
-                  (err, entry) => {
+                col.findOneAndUpdate(
+                  query,
+                  { $pull: { [index]: { [keyy]: valuee } } },
+                  { multi: true },
+                  (err, info) => {
                     if (err) {
-                      res.status(400).json(err);
+                      res.json({ message: "Something went wrong when DELETE" })
                     } else {
-                      res.json({
-                        message: `Entry with identifier ` +
-                          `{${key}: ${value}} updated.`
-                      })
+                      res.json(info);
                     }
-                  })
+                  }
+                )
               } else {
                 res.json({ message: "Value not found" })
               }
