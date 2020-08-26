@@ -49,7 +49,7 @@ app.get("/", (req, res) => {
   res.send("Use /api/feedback/collection_name/some_userID");
 });
 
-app.use('/api/feedback', require('./api/demoEntries/routes/deleteCol'));
+app.use('/api/feedback', require('./api/demoEntries/routes/deleteCols'));
 app.use('/api/feedback', require('./api/demoEntries/routes/getCol'));
 app.use('/api/feedback', require('./api/demoEntries/routes/getColEntry'));
 app.use('/api/feedback', require('./api/demoEntries/routes/deleteColEntry'));
