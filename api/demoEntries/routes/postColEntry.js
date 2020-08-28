@@ -33,8 +33,10 @@ router.route('/:db/:col')
           col.insertOne(entry, function (err) {
             if (err) {
               res.status(400).json(err);
+              client.close();
             } else {
               res.json(entry);
+              client.close();
             }
           })
         } else {
@@ -43,8 +45,10 @@ router.route('/:db/:col')
           new_col.insertOne(entry, function (err) {
             if (err) {
               res.status(400).json(err);
+              client.close();
             } else {
-              res.json(entry)
+              res.json(entry);
+              client.close();
             }
           })
         };

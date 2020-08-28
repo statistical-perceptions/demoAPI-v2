@@ -53,24 +53,29 @@ router.route('/:db/:col/:key-:value')
                 col.findOneAndUpdate(query, { $set: req.body }, (err, entry) => {
                   if (err) {
                     res.status(400).json(err);
+                    client.close();
                   } else {
                     res.json({
                       message: `Entry with identifier ` +
                         `{${key}: ${value}} updated.`
-                    })
+                    });
+                    client.close();
                   }
                 })
               } else {
-                res.json({ message: "Value not found" })
+                res.json({ message: "Value not found" });
+                client.close();
               }
-            } else (
-              res.json({ message: "Key not found" })
-            );
+            } else {
+              res.json({ message: "Key not found" });
+              client.close();
+            };
           });
         } else {
           res.json({ message: "Collection not found." });
+          client.close();
         };
-      })
+      });
     })
 
     // const coll = conn.collection(col_name);

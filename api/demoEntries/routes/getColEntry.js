@@ -48,16 +48,20 @@ router.route('/:db/:col/:key-:value')
             col.findOne(query, (err, entry) => {
               if (err) {
                 res.status(400).json(err);
+                client.close();
               } else {
                 res.json(entry);
+                client.close();
               }
             })
           } else {
-            res.json({ message: "Value not found" })
+            res.json({ message: "Value not found" });
+            client.close();
           }
-        } else (
-          res.json({ message: "Key not found" })
-        );
+        } else {
+          res.json({ message: "Key not found" });
+          client.close();
+        };
       });
     })
   });

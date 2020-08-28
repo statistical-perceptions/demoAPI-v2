@@ -28,13 +28,16 @@ router.route('/:db/createCol/:newCol')
           col_names.push(item["name"]);
         });
         if (col_names.includes(new_col)) {
-          res.json({ message: `Collection: (${new_col}) already exists.` })
+          res.json({ message: `Collection: (${new_col}) already exists.` });
+          client.close();
         } else {
           db.createCollection(new_col, function (err) {
             if (err) {
               res.status(400).json(err);
+              client.close();
             } else {
-              res.json({ message: `Successfully created ${new_col}` })
+              res.json({ message: `Successfully created ${new_col}` });
+              client.close();
             }
           })
         }

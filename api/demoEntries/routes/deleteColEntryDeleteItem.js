@@ -1,6 +1,3 @@
-// this request is for putting demographics link to an experiment config info 
-// on the config study page
-
 'use strict';
 
 const express = require('express');
@@ -63,23 +60,28 @@ router.route('/:db/:col/:key-:value/:index/:keyy-:valuee')
                   { multi: true },
                   (err, info) => {
                     if (err) {
-                      res.json({ message: "Something went wrong when DELETE" })
+                      res.json({ message: "Something went wrong when DELETE" });
+                      client.close();
                     } else {
                       res.json(info);
+                      client.close();
                     }
                   }
                 )
               } else {
-                res.json({ message: "Value not found" })
+                res.json({ message: "Value not found" });
+                client.close();
               }
-            } else (
-              res.json({ message: "Key not found" })
-            );
+            } else {
+              res.json({ message: "Key not found" });
+              client.close();
+            };
           });
         } else {
           res.json({ message: "Collection not found." });
+          client.close();
         };
-      })
+      });
     })
   });
 

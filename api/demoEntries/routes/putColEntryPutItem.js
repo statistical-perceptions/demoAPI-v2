@@ -59,7 +59,6 @@ router.route('/:db/:col/:key-:value/:index/:keyy-:valuee/:infoType')
               })
 
               const index = req.params.index;
-              console.log(value_array);
 
               if (value_array.includes(value)) {
                 const setKey = index + ".$[elem]." + infoType;
@@ -74,26 +73,32 @@ router.route('/:db/:col/:key-:value/:index/:keyy-:valuee/:infoType')
                   (err, info) => {
                     if (err) {
                       // res.status(400).json(err);
-                      res.json({ message: "Something went wrong when PUT" })
+                      res.json({ message: "Something went wrong when PUT" });
+                      client.close();
                     } else {
                       // res.json({
                       //   message: `Entry with identifier ` +
                       //     `{${key}: ${value}, ${keyy}: ${valuee}} updated with new ${infoType}.`
                       // })
                       res.json(info);
+                      client.close();
                     }
                   })
               } else {
-                res.json({ message: "Value not found" })
+                res.json({ message: "Value not found" });
+                client.close();
               }
-            } else (
-              res.json({ message: "Key not found" })
-            );
+            } else {
+              res.json({ message: "Key not found" });
+              client.close();
+            };
           });
         } else {
           res.json({ message: "Collection not found." });
+          client.close();
         };
-      })
+      });
+      client.close();
     })
   });
 

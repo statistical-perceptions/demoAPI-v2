@@ -44,14 +44,17 @@ router.route('/:db/:col')
           });
           if (err) {
             res.status(400).json(err);
+            client.close();
           };
           if (col_names.includes(col_name)) {
             res.json(collection);
+            client.close();
           } else {
             res.json({ message: `Collection (${col_name}) not found.` });
+            client.close();
           };
         });
-      })
+      });
     })
   });
 

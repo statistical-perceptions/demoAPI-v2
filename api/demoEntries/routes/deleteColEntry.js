@@ -10,7 +10,8 @@ var mongodb = require('../../../config/mongoURI');
 var mongodbURI = mongodb.URI;
 // const conn = mongoose.createConnection(mongodbURI);
 
-// use this route to delete all experiment config within a study 
+// use this route to delete a study's document (containing epxt configs) 
+// in username/info
 // '/' is based on /api/feedback
 router.route('/:db/:col/:key-:value')
   .delete((req, res) => {
@@ -49,20 +50,24 @@ router.route('/:db/:col/:key-:value')
             col.findOneAndDelete(query, (err, entry) => {
               if (err) {
                 res.status(400).json(err);
+                client.close();
               } else {
                 res.json(
                   // { message: `Entry with identifier ` +
                   //   `{${key}: ${value}} deleted.`}
                   entry["value"]["experiments"]
                 )
+                client.close();
               }
             })
           } else {
-            res.json({ message: "Value not found" })
+            res.json({ message: "Value not found" });
+            client.close();
           }
-        } else (
-          res.json({ message: "Key not found" })
-        );
+        } else {
+          res.json({ message: "Key not found" });
+          client.close();
+        };
       });
     })
   });

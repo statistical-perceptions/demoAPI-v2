@@ -39,8 +39,10 @@ router.route('/:db/:option')
               if (col_names.includes(colName)) {
                 db.dropCollection(colName);
                 res.json({ deletedCol: colName });
+                client.close();
               } else {
-                res.json({ message: "colName not found in database." })
+                res.json({ message: "colName not found in database." });
+                client.close();
               }
               break;
             case "all":
@@ -50,9 +52,11 @@ router.route('/:db/:option')
                 name.split("-")[0] == studyName)
               studyCols.forEach(name => db.dropCollection(name));
               res.json({ deletedCols: studyCols });
+              client.close();
               break;
             default:
-              res.json({ message: "Option can either be one or all." })
+              res.json({ message: "Option can either be one or all." });
+              client.close();
           };
         };
       });

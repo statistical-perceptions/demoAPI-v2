@@ -28,8 +28,10 @@ router.route('/:db/collections')
         });
         if (err) {
           res.status(400).json(err);
+          client.close();
         } else {
           res.json(col_names);
+          client.close();
         };
       });
     })
