@@ -98,7 +98,6 @@ router.route('/:db/:col/:key-:value/:index/:keyy-:valuee/:infoType')
           client.close();
         };
       });
-      client.close();
     })
   });
 
