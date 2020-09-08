@@ -20,7 +20,7 @@ const hostname = 'localhost';
 const dev_port = 5000;
 
 // Change ENV to dev for debugging and prod for deployment
-var ENV = 'dev';
+var ENV = 'prod';
 
 mongoose.connect(mongooseURI, dbOptions, (err) => {
   if (err) {
