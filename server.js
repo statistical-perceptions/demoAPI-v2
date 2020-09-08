@@ -49,6 +49,20 @@ app.get("/", (req, res) => {
   res.send("Use /api/feedback/collection_name/some_userID");
 });
 
+app.get("/normalCurve", (req, res) => {
+  var argArr = req.body.argArr;
+  argArr.unshift('./api/demoEntries/items/normalCurve.py');
+  console.log(argArr);
+
+  const { spawn } = require('child_process');
+  const pythonProcess = spawn('python', argArr);
+
+  pythonProcess.stdout.on('data', function(data){
+    console.log(data.toString());
+    res.send(data);
+  });
+});
+
 app.use('/api/feedback', require('./api/demoEntries/routes/deleteCols'));
 app.use('/api/feedback', require('./api/demoEntries/routes/getCol'));
 app.use('/api/feedback', require('./api/demoEntries/routes/getColEntry'));
