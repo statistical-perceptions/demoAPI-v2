@@ -63,15 +63,15 @@ app.get("/", (req, res) => {
 //   });
 // });
 
-app.use('/api/feedback', require('./api/demoEntries/routes/deleteCols'));
-app.use('/api/feedback', require('./api/demoEntries/routes/getCol'));
-app.use('/api/feedback', require('./api/demoEntries/routes/getColEntry'));
-app.use('/api/feedback', require('./api/demoEntries/routes/deleteColEntry'));
-app.use('/api/feedback', require('./api/demoEntries/routes/postColEntry'));
-app.use('/api/feedback', require('./api/demoEntries/routes/putColEntry'));
-app.use('/api/feedback', require('./api/demoEntries/routes/putColEntryItem'));
-app.use('/api/feedback', require('./api/demoEntries/routes/putColEntryPutItem'));
-app.use('/api/feedback', require('./api/demoEntries/routes/deleteColEntryDeleteItem'));
-app.use('/api', require('./api/demoEntries/routes/cols'));
-app.use('/api', require('./api/demoEntries/routes/users'));
-app.use('/api', require('./api/demoEntries/routes/createCol'));
+app.use('/api/feedback', require('./api/actions/routes/deleteCols'));
+app.use('/api/feedback', require('./api/actions/routes/getCol'));
+app.use('/api/feedback', require('./api/actions/routes/getColEntry'));
+app.use('/api/feedback', require('./api/actions/routes/deleteColEntry'));
+app.use('/api/feedback', require('./api/actions/routes/postColEntry'));
+app.use('/api/feedback', require('./api/actions/routes/putColEntry'));
+app.use('/api/feedback', require('./api/actions/routes/putColEntryItem'));
+app.use('/api/feedback', require('./api/actions/routes/putColEntryPutItem'));
+app.use('/api/feedback', require('./api/actions/routes/deleteColEntryDeleteItem'));
+app.use('/api', require('./api/actions/routes/cols'));
+app.use('/api', require('./api/actions/routes/users'));
+app.use('/api', require('./api/actions/routes/createCol'));
