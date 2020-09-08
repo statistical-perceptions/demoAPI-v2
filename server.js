@@ -49,7 +49,7 @@ app.get("/", (req, res) => {
   res.send("Use /api/feedback/collection_name/some_userID");
 });
 
-app.get("/normalCurve", (req, res) => {
+app.post("/normalCurve", (req, res) => {
   var argArr = req.body.argArr;
   argArr.unshift('./api/demoEntries/items/normalCurve.py');
   console.log(argArr);
