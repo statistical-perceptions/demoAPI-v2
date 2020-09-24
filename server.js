@@ -19,7 +19,7 @@ app.use(cors());
 const hostname = 'localhost';
 const dev_port = 5000;
 
-// Change ENV to dev for debugging and prod for deployment
+// Change ENV to 'dev' for debugging and prod for deployment
 var ENV = 'prod';
 
 mongoose.connect(mongooseURI, dbOptions, (err) => {
@@ -49,16 +49,20 @@ app.get("/", (req, res) => {
   res.send("Use /api/feedback/collection_name/some_userID");
 });
 
+/**
+ * Run ./api/actions/items/normalCurve.py and send back normalCurve config data
+ * Refer to https://stackoverflow.com/questions/23450534/how-to-call-a-python-function-from-node-js
+ */
 app.post("/normalCurve", (req, res) => {
   var argArr = req.body.argArr;
   argArr.unshift('./api/actions/items/normalCurve.py');
-  console.log(argArr);
-
+  // console.log(argArr);
+  
   const { spawn } = require('child_process');
   const pythonProcess = spawn('python', argArr);
 
   pythonProcess.stdout.on('data', function(data){
-    console.log(data.toString());
+    // console.log(data);
     res.send(data);
   });
 });
