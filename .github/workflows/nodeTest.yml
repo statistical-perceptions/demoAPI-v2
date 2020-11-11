@@ -14,7 +14,7 @@ on:
 jobs:
   build:
     # Name the Job
-    name: Lint Code Base
+    name: lintCodeTest
     # Set the agent to run on
     runs-on: ubuntu-latest
 
