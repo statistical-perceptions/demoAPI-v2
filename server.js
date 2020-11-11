@@ -1,4 +1,4 @@
-cons express = require('express');
+const express = require('express');
 const bodyParser = require('body-parser'); // with req.body
 const cors = require('cors'); // front end needs this
 const mongoose = require('mongoose');
