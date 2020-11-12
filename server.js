@@ -23,7 +23,7 @@ const dev_port = 5000;
 var ENV = 'prod';
 
 mongoose.connect(mongooseURI, dbOptions, (err) => {
-  if (err) {
+//  if (err) {
     console.log(err);
   };
 
