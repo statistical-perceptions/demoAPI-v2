@@ -25,7 +25,7 @@ var ENV = 'prod';
 mongoose.connect(mongooseURI, dbOptions, (err) => {
   if (err) {
     console.log(err);
- // };
+  };
 
   var server;
 
