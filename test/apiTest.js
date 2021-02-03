@@ -1,7 +1,8 @@
-const chai = require("chai");
-const chaiHttp = require("chai-http");
+
+const chai = require("chai"); //Assertion library import
+const chaiHttp = require("chai-http"); // for http integration testing
 const expect = chai.expect
-const baseUrl = "https://test-api-615.herokuapp.com"
+const baseUrl = "https://test-api-615.herokuapp.com" //base url where the routes are rooted
 const express = require('express');
 const router = express.Router();
 let should = chai.should();
@@ -9,8 +10,9 @@ let should = chai.should();
 
 
 chai.use(chaiHttp);
+//Grouping the tests --- Route tests
 describe("Route tests", function(){
-    
+    //GET request test --- Get Collection Names   
     it('get collections names test', function(done) {
         chai.request(baseUrl)
         .get('/api/testDB/collections')
@@ -23,7 +25,7 @@ describe("Route tests", function(){
 
         });
     });
-
+    //POST request test --- Create a New Collection
     it('create collections test', function(done) {
         let collection = {
             name: "Collection Test",
@@ -39,6 +41,7 @@ describe("Route tests", function(){
 
         });
     });
+    //DELETE request test --- Delete a Specific Document from a Collection
     it('delete collection(specific document) test', function(done) {
        
         chai.request(baseUrl)
@@ -52,6 +55,7 @@ describe("Route tests", function(){
 
         });
     });
+    //DELETE request test --- Delete an Element in an Array in a Document
     it('delete collection test(element in an array, in document)', function(done) {
        
         chai.request(baseUrl)
@@ -65,6 +69,7 @@ describe("Route tests", function(){
 
         });
     });
+    //DELETE request test --- Delete Multiple Collections
     it('delete collection test(all collections in a study)', function(done) {
        
         chai.request(baseUrl)
@@ -78,6 +83,7 @@ describe("Route tests", function(){
 
         });
     });
+    //GET request test --- Get Documents from a Collection
     it('get documents test(from collection)', function(done) {
        
         chai.request(baseUrl)
@@ -91,6 +97,7 @@ describe("Route tests", function(){
 
         });
     });
+    //GET request test --- Get a Specific Document from a Collection
     it('get specific document test(from collection)', function(done) {
        
         chai.request(baseUrl)
@@ -104,6 +111,7 @@ describe("Route tests", function(){
 
         });
     });
+    //POST request test --- Create a New Document in a Collection
     it('create a new document test(collection)', function(done) {
         let document = { "name": "StormTrooper", "color": "white", "actions": [{"1": "shoot"}, {"2": "biubiubiu"}] }       
         chai.request(baseUrl)
@@ -118,9 +126,8 @@ describe("Route tests", function(){
 
         });
     });
+    //PUT request test --- Change the Content of a Document
     it('change the content of a document test(collection)', function(done) {
- 
-
             chai.request(baseUrl)
             .put('/api/feedback/testDB/newCollection/name-StormTrooper')
             .send({name :"StormTrooper",
@@ -134,6 +141,7 @@ describe("Route tests", function(){
 
         });
     });
+    //PUT request test --- Append to ann Array in a Document's Entry
     it('append to an array in a document entry test(collection)', function(done) {
  
 
@@ -150,8 +158,8 @@ describe("Route tests", function(){
 
        });
     });
+    //PUT request test --- Update an Elememt in an Array in a Document's Entry
     it('update an element in an array in a docoument entry test(collection)', function(done) {
- 
 
         chai.request(baseUrl)
         .put('/api/feedback/testDB/newCollection/name-StormTrooper/acions/1-shoot/accuracy')
@@ -165,7 +173,8 @@ describe("Route tests", function(){
 
        });
     });
-    it('user routes', function(done) {
+    //User Routes Test --- Login Test
+    it('login user routes', function(done) {
  
 
         chai.request(baseUrl)
