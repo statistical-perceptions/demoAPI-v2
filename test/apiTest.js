@@ -4,7 +4,6 @@ const chaiHttp = require("chai-http"); // for http integration testing
 const expect = chai.expect
 const baseUrl = "https://test-api-615.herokuapp.com" //base url where the routes are rooted
 const express = require('express');
-const router = express.Router();
 let should = chai.should();
 
 
@@ -164,6 +163,7 @@ it('get specific document test(from collection)', function(done) {
         .end(function (err, res) {
             expect(res).to.have.status(200);
             res.body.should.be.a('object');
+
 
             
             done();
